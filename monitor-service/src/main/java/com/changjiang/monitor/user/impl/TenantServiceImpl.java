@@ -1,5 +1,6 @@
 package com.changjiang.monitor.user.impl;
 
+import ch.qos.logback.core.model.processor.ModelHandlerException;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.changjiang.monitor.dto.status.TenantStatus;
@@ -18,6 +19,7 @@ import com.changjiang.monitor.user.wrapper.TenantWrapper;
 import jakarta.annotation.Resource;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -34,6 +36,7 @@ import java.util.Optional;
  * @Author changjiang
  * @Date 2022/12/11 since beijing
  */
+@Lazy
 @Service
 public class TenantServiceImpl implements ITenantService {
 
@@ -62,7 +65,7 @@ public class TenantServiceImpl implements ITenantService {
         tenant = repository.saveAndFlush(tenant);
 
         // 创建管理员账号
-        CreateUserRequest createUserRequest= new CreateUserRequest();
+        CreateUserRequest createUserRequest = new CreateUserRequest();
         createUserRequest.setCreateUserType(CreateUserType.TenantInit);
         createUserRequest.setExpiredTime(tenant.getExpiredTime());
         createUserRequest.setPhoneNumber(tenant.getManagePhoneNumber());
@@ -104,7 +107,14 @@ public class TenantServiceImpl implements ITenantService {
 
     @Override
     public TenantDTO findById(String tenantId) {
-        return null;
+        if (StringUtils.isBlank(tenantId)){
+            throw new MonitorException(CodeEnum.IllegalArgument);
+        }
+        Optional<Tenant> optional = repository.findById(tenantId);
+        if (optional.isEmpty()){
+            throw new MonitorException(CodeEnum.IllegalArgumentNotFind);
+        }
+        return tenantWrapper.convertET(optional.get());
     }
 
     @Override

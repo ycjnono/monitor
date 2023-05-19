@@ -2,6 +2,7 @@ package com.changjiang.monitor.repository;
 
 import com.changjiang.monitor.entity.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,5 +12,5 @@ import org.springframework.stereotype.Repository;
  * @Date 2022/12/11
  */
 @Repository
-public interface RegionRepository extends JpaRepository<Region, String> {
+public interface RegionRepository extends JpaRepository<Region, String>, JpaSpecificationExecutor<Region> {
 }

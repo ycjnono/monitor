@@ -1,6 +1,6 @@
 package com.changjiang.monitor.dto.region;
 
-import com.changjiang.monitor.dto.status.Status;
+import com.changjiang.monitor.dto.status.RegionStatus;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -33,7 +33,7 @@ public class RegionDTO implements Serializable {
     /**
      * 状态
      */
-    private Status status;
+    private RegionStatus status;
 
     /**
      * 类型

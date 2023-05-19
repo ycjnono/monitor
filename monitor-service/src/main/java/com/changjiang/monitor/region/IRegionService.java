@@ -21,6 +21,21 @@ public interface IRegionService {
     RegionDTO save(RegionRequest request);
 
     /**
+     *
+     * @param request
+     * @return
+     */
+    RegionDTO update(RegionRequest request);
+
+    /**
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    RegionDTO updateStatus(String id, String status);
+
+    /**
      * 分页检索
      *
      * @param request

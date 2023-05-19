@@ -20,4 +20,13 @@ public interface UserAuthRepository extends JpaRepository<UserAuth, String> {
      * @return
      */
     UserAuth findByToken(String token);
+
+    /**
+     * This method searches and retrieves the UserAuth object associated with the specified userId.
+     * It is expected to return a single result since userId is unique for each user in the system.
+     *
+     * @param userId
+     * @return
+     */
+    UserAuth findByUserId(String userId);
 }

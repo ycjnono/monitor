@@ -1,8 +1,6 @@
 package com.changjiang.monitor.repository;
 
 import com.changjiang.monitor.entity.Tenant;
-import org.hibernate.query.criteria.JpaSelectCriteria;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
