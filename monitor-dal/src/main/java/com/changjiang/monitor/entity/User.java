@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.util.Date;
@@ -20,6 +21,7 @@ import java.util.Date;
 @Table(name = "user")
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "`deleted` = false")
+@SQLDelete(sql = "update `user` set `deleted` = true where id = ?")
 public class User extends BaseEntity{
 
     /**

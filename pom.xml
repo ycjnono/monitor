@@ -17,6 +17,7 @@
     <modules>
         <module>monitor-web</module>
         <module>monitor-dal</module>
+        <module>monitor-etl</module>
         <module>monitor-service</module>
         <module>monitor-component</module>
         <module>monitor-agent</module>

@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 /**
  * 区域
@@ -15,6 +17,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 @Table(name = "region")
+@Where(clause = "`deleted` = false")
+@SQLDelete(sql = "update `region` set `deleted` = true where id = ?")
 @EqualsAndHashCode(callSuper = true)
 public class Region extends BaseEntity{
 

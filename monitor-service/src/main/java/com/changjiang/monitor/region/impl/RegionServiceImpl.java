@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import com.changjiang.monitor.dto.region.RegionDTO;
 import com.changjiang.monitor.dto.region.RegionRequest;
+import com.changjiang.monitor.dto.region.RegionType;
 import com.changjiang.monitor.dto.status.RegionStatus;
 import com.changjiang.monitor.entity.Region;
 import com.changjiang.monitor.exception.MonitorException;
@@ -72,6 +73,14 @@ public class RegionServiceImpl implements IRegionService {
             RegionStatus status = request.getStatus();
             if (status != null) {
                 condition.add(criteriaBuilder.equal(root.get("status"), status.name()));
+            }
+            String tenantId = request.getTenantId();
+            if (StringUtils.isNotBlank(tenantId)){
+                condition.add(criteriaBuilder.equal(root.get("tenantId"), tenantId));
+            }
+            RegionType type = request.getType();
+            if (type != null){
+                condition.add(criteriaBuilder.equal(root.get("type"), type.name()));
             }
             if (CollectionUtil.isEmpty(condition)) {
                 return null;
