@@ -1,10 +1,10 @@
-package com.cj.iotmonitor.monitoretl;
+package com.changjiang.monitor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MonitorEtlApplicationTests {
+class MonitorScheduleApplicationTests {
 
     @Test
     void contextLoads() {

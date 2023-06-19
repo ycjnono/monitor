@@ -26,7 +26,11 @@ public enum CodeEnum {
     IllegalUserStatus("100502", "用户状态不正常"),
     IllegalUserPass("100503", "用户名或密码不正确"),
 
+    ApiServerFail("100601","Api服务请求失败"),
+    ApiServerResponseStatusFail("100602","Api服务请求结果参数解析错误"),
 
+    ScheduleFail("200500", "调度异常"),
+    ScheduleConfigFail("200501", "调度配置异常"),
     ServerFail("100500", "服务运行异常"),
     ;
 

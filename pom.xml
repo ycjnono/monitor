@@ -19,6 +19,8 @@
         <module>monitor-dal</module>
         <module>monitor-etl</module>
         <module>monitor-service</module>
+        <module>monitor-gateway</module>
+        <module>monitor-schedule</module>
         <module>monitor-component</module>
         <module>monitor-agent</module>
         <module>monitor-worker</module>
@@ -58,6 +60,11 @@
             <dependency>
                 <groupId>com.changjiang</groupId>
                 <artifactId>monitor-worker</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cj.monitor</groupId>
+                <artifactId>monitor-schedule</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>

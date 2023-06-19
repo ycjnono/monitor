@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2023/5/28 since beijing
  */
 @RestController
-@RequestMapping("/device/shadow")
+@RequestMapping("/api/device/shadow")
 public class DeviceShadowController {
 
     @Resource
