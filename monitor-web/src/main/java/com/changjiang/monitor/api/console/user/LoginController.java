@@ -49,7 +49,7 @@ public class LoginController {
         Cookie cookie = new Cookie("gw_token", loginResponse.getToken());
         cookie.setMaxAge(3600);
         response.addCookie(cookie);
-        Log.topic("Login").log("request", request).log("response", response).log("tag", "finishLogin").info(log);
+        Log.topic("Login").log("request", request).log("tag", "finishLogin").info(log);
         return loginResponse;
     }
 

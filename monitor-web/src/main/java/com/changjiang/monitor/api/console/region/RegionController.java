@@ -64,7 +64,7 @@ public class RegionController {
         return new RegionDTO();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateStatus/{id}")
     public Object updateStatus(@PathVariable String id, @RequestBody RegionRequest request){
         return new RegionDTO();
     }

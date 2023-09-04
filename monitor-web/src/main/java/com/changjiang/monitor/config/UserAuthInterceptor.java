@@ -12,6 +12,7 @@ import com.changjiang.monitor.utils.ClientIpUtil;
 import com.changjiang.monitor.utils.RequestIdUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,17 @@ public class UserAuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) throws Exception {
         String gwToken = request.getHeader("gw_token");
+        Cookie[] cookies = request.getCookies();
+        if (StringUtils.isBlank(gwToken)){
+            for (Cookie cookie : cookies) {
+                String name = cookie.getName();
+                if ("gw_token".equals(name)){
+                    gwToken = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
         String remoteHost = ClientIpUtil.getRemoteHost(request);
         Log.topic("ConsoleLoginCheck").log("status", "checking").log("remoteHost",remoteHost).log("token", gwToken).info(log);
         if (StringUtils.isBlank(gwToken)){

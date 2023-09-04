@@ -14,7 +14,7 @@ public class ThreadLocalUtil {
     /**
      * 参数
      */
-    private static final ThreadLocal<Map<String, Object>> threadParams = new ThreadLocal<>();
+    private static ThreadLocal<Map<String, Object>> threadParams = new ThreadLocal<>();
 
     /**
      * 置入参数
@@ -28,6 +28,7 @@ public class ThreadLocalUtil {
             params = new TreeMap<>();
         }
         params.put(key.getKey(), value);
+        threadParams.set(params);
     }
 
     /**

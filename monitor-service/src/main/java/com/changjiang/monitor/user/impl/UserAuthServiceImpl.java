@@ -3,18 +3,20 @@ package com.changjiang.monitor.user.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdUtil;
 import com.changjiang.monitor.dto.user.UserAuthDTO;
-import com.changjiang.monitor.dto.user.UserDTO;
+import com.changjiang.monitor.entity.User;
 import com.changjiang.monitor.entity.UserAuth;
 import com.changjiang.monitor.exception.MonitorException;
 import com.changjiang.monitor.repository.UserAuthRepository;
+import com.changjiang.monitor.repository.UserRepository;
 import com.changjiang.monitor.result.CodeEnum;
 import com.changjiang.monitor.user.IUserAuthService;
-import com.changjiang.monitor.user.IUserService;
 import com.changjiang.monitor.user.wrapper.UserAuthWrapper;
 import jakarta.annotation.Resource;
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * 用户token相关服务接口
@@ -26,7 +28,7 @@ import org.springframework.stereotype.Service;
 public class UserAuthServiceImpl implements IUserAuthService {
 
     @Resource
-    private IUserService userService;
+    private UserRepository userRepository;
 
     @Resource
     private UserAuthRepository repository;
@@ -44,15 +46,16 @@ public class UserAuthServiceImpl implements IUserAuthService {
             return null;
         }
         // 查询用户
-        UserDTO userDTO = userService.findById(userAuth.getUserId());
-        if (userDTO == null) {
+        Optional<User> optional = userRepository.findById(userAuth.getUserId());
+        if (optional.isEmpty()) {
             throw new MonitorException(CodeEnum.IllegalUserToken);
         }
+        User user = optional.get();
         UserAuthDTO userAuthDTO = new UserAuthDTO();
-        userAuthDTO.setUserId(userDTO.getId());
+        userAuthDTO.setUserId(user.getId());
         userAuthDTO.setToken(userAuth.getToken());
         userAuthDTO.setExpired(userAuth.getExpired());
-        BeanUtil.copyProperties(userDTO, userAuthDTO);
+        BeanUtil.copyProperties(user, userAuthDTO);
         return userAuthDTO;
     }
 

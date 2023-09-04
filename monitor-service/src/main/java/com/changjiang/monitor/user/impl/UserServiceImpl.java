@@ -66,7 +66,7 @@ public class UserServiceImpl implements IUserService {
             throw new MonitorException(CodeEnum.IllegalUserPass);
         }
         // 用户状态
-        if (StringUtils.equals(UserStatus.Normal.name(), user.getStatus())){
+        if (!StringUtils.equals(UserStatus.Normal.name(), user.getStatus())){
             throw new MonitorException(CodeEnum.IllegalUserStatus);
         }
 

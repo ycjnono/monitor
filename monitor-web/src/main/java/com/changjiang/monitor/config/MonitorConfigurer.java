@@ -24,10 +24,10 @@ public class MonitorConfigurer extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // console
-//        List<String> consolePath = List.of("/console/**");
-//        List<String> consoleLoginPath = List.of("/console/login");
-//        registry.addInterceptor(userAuthInterceptor)
-//                .addPathPatterns(consolePath)
-//                .excludePathPatterns(consoleLoginPath);
+        List<String> consolePath = List.of("/console/**");
+        List<String> consoleLoginPath = List.of("/console/login");
+        registry.addInterceptor(userAuthInterceptor)
+                .addPathPatterns(consolePath)
+                .excludePathPatterns(consoleLoginPath);
     }
 }
