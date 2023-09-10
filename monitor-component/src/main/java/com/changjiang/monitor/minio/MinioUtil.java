@@ -6,6 +6,7 @@ import io.minio.ObjectWriteResponse;
 import io.minio.PutObjectArgs;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -70,8 +71,10 @@ public class MinioUtil {
      * @param inputStream 文件流
      * @return 文件上传后路径
      */
-    public String putObject(String fileName, String contentType, InputStream inputStream) {
-        String uploadPath = config.getUrl() + "/" + fileName;
+    public String putObject(String fileName,String uploadPath, String contentType, InputStream inputStream) {
+        if (StringUtils.isBlank(uploadPath)){
+            uploadPath = config.getUrl() + "/" + fileName;
+        }
         Date begin = new Date();
         Log.topic("MinioPutObject").log("fileName", fileName).log("contentType", contentType)
                 .log("status", "begin").log("uploadPath", uploadPath).info(log);

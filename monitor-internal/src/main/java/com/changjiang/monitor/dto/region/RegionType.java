@@ -26,5 +26,10 @@ public enum RegionType {
     /**
      * 活动
      */
-    Activity
+    Activity,
+
+    /**
+     * 通用
+     */
+    Common
 }

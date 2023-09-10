@@ -63,4 +63,10 @@ public class Region extends BaseEntity{
      */
     @Column(name = "address")
     private String address;
+
+    /**
+     * 类型
+     */
+    @Column(name = "type")
+    private String type;
 }

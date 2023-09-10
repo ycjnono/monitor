@@ -73,12 +73,14 @@ public class UserServiceImpl implements IUserService {
         // 生成Token,插入登录表
         UserAuthDTO userAuthDTO = new UserAuthDTO();
         userAuthDTO.setUserId(user.getId());
+        userAuthDTO.setName(user.getName());
         userAuthDTO.setTenantId(user.getTenantId());
         userAuthDTO.setExpired(DateUtil.nextMonth());
         UserAuthDTO authDTO = userAuthService.save(userAuthDTO);
 
         UserLoginResponse response = new UserLoginResponse();
         response.setToken(authDTO.getToken());
+        response.setUser(userAuthDTO);
         return response;
     }
 

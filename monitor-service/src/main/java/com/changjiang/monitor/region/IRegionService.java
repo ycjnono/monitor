@@ -15,16 +15,18 @@ import com.changjiang.monitor.result.PageResult;
 public interface IRegionService {
 
     /**
-     * 保存区域
+     * This method saves a new RegionDTO object based on the provided RegionRequest object.
      *
-     * @param request 请求参数
-     * @return
+     * @param request The RegionRequest object containing the necessary information for the creation of the new RegionDTO object.
+     * @return The newly created RegionDTO object.
      */
     RegionDTO save(RegionRequest request);
 
     /**
-     * @param request
-     * @return
+     * This method updates a RegionDTO object based on the provided RegionRequest object.
+     *
+     * @param request The RegionRequest object containing the necessary information for the update.
+     * @return The updated RegionDTO object.
      */
     RegionDTO update(RegionRequest request);
 

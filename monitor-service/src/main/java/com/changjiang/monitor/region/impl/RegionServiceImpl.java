@@ -12,6 +12,7 @@ import com.changjiang.monitor.region.IRegionService;
 import com.changjiang.monitor.repository.RegionRepository;
 import com.changjiang.monitor.result.CodeEnum;
 import com.changjiang.monitor.result.PageResult;
+import com.changjiang.monitor.user.wrapper.RegionWrapper;
 import jakarta.annotation.Resource;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.StringUtils;
@@ -36,14 +37,18 @@ public class RegionServiceImpl implements IRegionService {
     @Resource
     private RegionRepository repository;
 
+    @Resource
+    private RegionWrapper regionWrapper;
+
     @Override
     public RegionDTO save(RegionRequest request) {
         // 参数校验
         if (request == null || StringUtils.isAnyBlank(request.getName(), request.getTenantId())) {
             throw new MonitorException(CodeEnum.IllegalArgument);
         }
-
-        return null;
+        Region region = regionWrapper.convertTE(request);
+        region = repository.saveAndFlush(region);
+        return regionWrapper.convertET(region);
     }
 
     @Override

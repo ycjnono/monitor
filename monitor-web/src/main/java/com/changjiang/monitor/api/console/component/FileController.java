@@ -1,15 +1,15 @@
 package com.changjiang.monitor.api.console.component;
 
 import com.changjiang.monitor.minio.MinioUtil;
+import com.changjiang.monitor.user.wrapper.UserTokenWrapper;
+import com.changjiang.monitor.user.wrapper.UserWrapper;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 /**
  * 文件上传
@@ -18,7 +18,7 @@ import java.io.InputStream;
  * @Date 2023/9/4 since beijing
  */
 @RestController
-@RequestMapping("/component/file")
+@RequestMapping("/console/component/file")
 public class FileController {
 
     @Resource
@@ -29,6 +29,8 @@ public class FileController {
         String name = file.getOriginalFilename();
         String contentType = file.getContentType();
         InputStream inputStream = file.getInputStream();
-        return minioUtil.putObject(name, contentType, inputStream);
+        String uploadPath = Objects.requireNonNull(UserTokenWrapper.currentUser()).getTenantId()
+                + "/" + name;
+        return minioUtil.putObject(name, contentType,uploadPath, inputStream);
     }
 }

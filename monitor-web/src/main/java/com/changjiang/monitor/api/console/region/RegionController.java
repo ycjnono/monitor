@@ -2,9 +2,12 @@ package com.changjiang.monitor.api.console.region;
 
 import com.changjiang.monitor.dto.region.RegionDTO;
 import com.changjiang.monitor.dto.region.RegionRequest;
+import com.changjiang.monitor.dto.status.RegionStatus;
+import com.changjiang.monitor.dto.status.TenantStatus;
 import com.changjiang.monitor.region.IRegionService;
 import com.changjiang.monitor.result.PageResult;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -38,8 +41,17 @@ public class RegionController {
     public Object page(@RequestParam String tenantId, @RequestParam(required = false) String name,
                        @RequestParam(required = false) String status, @RequestParam(required = false) String type,
                        @RequestParam(required = false) Boolean parent,
-                       @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize) {
-        return PageResult.of(new ArrayList<>(), 0L, pageNo, pageSize);
+                       @RequestParam(defaultValue = "0") Integer pageNo,
+                       @RequestParam(defaultValue = "10") Integer pageSize) {
+        RegionRequest request = new RegionRequest();
+        request.setName(name);
+        if (StringUtils.isNotBlank(status)) {
+            request.setStatus(RegionStatus.valueOf(status));
+        }
+        request.setTenantId(tenantId);
+        request.setPageNo(pageNo);
+        request.setPageSize(pageSize);
+        return regionService.page(request);
     }
 
     /**
@@ -50,7 +62,7 @@ public class RegionController {
      */
     @PostMapping
     public Object save(@RequestBody RegionRequest request){
-        return new RegionDTO();
+        return regionService.save(request);
     }
 
     /**

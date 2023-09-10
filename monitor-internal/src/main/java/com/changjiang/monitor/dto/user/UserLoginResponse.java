@@ -17,4 +17,9 @@ public class UserLoginResponse implements Serializable {
      * token
      */
     private String token;
+
+    /**
+     * 登录信息
+     */
+    private UserAuthDTO user;
 }
