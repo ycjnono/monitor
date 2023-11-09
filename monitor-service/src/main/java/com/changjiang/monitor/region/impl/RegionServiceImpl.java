@@ -98,7 +98,7 @@ public class RegionServiceImpl implements IRegionService {
         if (CollectionUtil.isEmpty(list)) {
             return PageResult.of(new ArrayList<>(), page.getTotalElements(), request.getPageNo(), request.getPageSize());
         }
-        List<RegionDTO> dtoList = list.stream().map(region -> BeanUtil.toBean(region, RegionDTO.class)).toList();
+        List<RegionDTO> dtoList = list.stream().map(region -> regionWrapper.convertET(region)).toList();
         return PageResult.of(dtoList, page.getTotalElements(), request.getPageNo(), request.getPageSize());
     }
 }

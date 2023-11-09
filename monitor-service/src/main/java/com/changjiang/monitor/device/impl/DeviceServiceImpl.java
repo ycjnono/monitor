@@ -6,10 +6,7 @@ import com.changjiang.monitor.device.wrapper.DeviceWrapper;
 import com.changjiang.monitor.dto.device.DeviceDTO;
 import com.changjiang.monitor.dto.device.DeviceRequest;
 import com.changjiang.monitor.dto.status.DeviceStatus;
-import com.changjiang.monitor.dto.status.TenantStatus;
-import com.changjiang.monitor.dto.user.TenantDTO;
 import com.changjiang.monitor.entity.Device;
-import com.changjiang.monitor.entity.Tenant;
 import com.changjiang.monitor.exception.MonitorException;
 import com.changjiang.monitor.repository.DeviceRepository;
 import com.changjiang.monitor.result.CodeEnum;
@@ -45,7 +42,15 @@ public class DeviceServiceImpl implements IDeviceService {
     @Override
     public DeviceDTO save(DeviceRequest request) {
         // check param
-        return null;
+        if (StringUtils.isAnyBlank(request.getTenantId(), request.getName())){
+            throw new MonitorException(CodeEnum.IllegalArgument);
+        }
+        // convert
+        Device device = deviceWrapper.convertTE(request);
+        // save
+        device = repository.saveAndFlush(device);
+        // convert
+        return deviceWrapper.convertET(device);
     }
 
     @Override
@@ -62,7 +67,15 @@ public class DeviceServiceImpl implements IDeviceService {
 
     @Override
     public DeviceDTO update(DeviceRequest request) {
-        return null;
+        // check params
+        if (request == null || StringUtils.isAnyBlank(request.getId(), request.getTenantId(),
+                request.getName())){
+            throw new MonitorException(CodeEnum.IllegalArgument);
+        }
+        // convert to entity
+        Device device = deviceWrapper.convertTE(request);
+        device = repository.saveAndFlush(device);
+        return deviceWrapper.convertET(device);
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.changjiang.monitor.entity;
 
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 /**
  * 设备规格
@@ -10,6 +13,9 @@ import lombok.EqualsAndHashCode;
  * @Date 2023/5/24 since beijing
  */
 @Data
+@Table(name = "device_specs")
+@Where(clause = "`deleted` = false")
+@SQLDelete(sql = "update `device_specs` set `deleted` = true where id = ?")
 @EqualsAndHashCode(callSuper = true)
 public class DeviceSpecs extends BaseEntity{
 

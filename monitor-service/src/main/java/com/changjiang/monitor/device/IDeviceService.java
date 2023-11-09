@@ -47,10 +47,10 @@ public interface IDeviceService {
     List<DeviceDTO> list(DeviceRequest request);
 
     /**
-     * 分页查找
+     * This method is used to retrieve a page of DeviceDTO objects based on the given DeviceRequest.
      *
-     * @param request
-     * @return
+     * @param request The DeviceRequest object containing the parameters for pagination and filtering.
+     * @return A PageResult object containing the requested page of DeviceDTO objects.
      */
     PageResult<DeviceDTO> page(DeviceRequest request);
 }

@@ -8,6 +8,8 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.Date;
+
 /**
  * 区域
  *
@@ -69,4 +71,10 @@ public class Region extends BaseEntity{
      */
     @Column(name = "type")
     private String type;
+
+    /**
+     * 过期时间
+     */
+    @Column(name = "expired_time")
+    private Date expiredTime;
 }

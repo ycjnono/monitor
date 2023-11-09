@@ -2,6 +2,7 @@ package com.changjiang.monitor.dto.device;
 
 import com.changjiang.monitor.base.BaseDTO;
 import com.changjiang.monitor.dto.status.DeviceStatus;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -68,7 +69,7 @@ public class DeviceDTO extends BaseDTO {
     /**
      * 详细配置
      */
-    private String config;
+    private DeviceConfigDTO config;
 
     /**
      * 制造商

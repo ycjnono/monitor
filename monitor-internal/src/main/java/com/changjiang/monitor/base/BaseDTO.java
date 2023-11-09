@@ -16,10 +16,10 @@ public class BaseDTO implements Serializable {
     /**
      * id
      */
-    private String id;
+    protected String id;
 
     /**
      * 租户id
      */
-    private String tenantId;
+    protected String tenantId;
 }

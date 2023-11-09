@@ -3,14 +3,10 @@ package com.changjiang.monitor.api.console.region;
 import com.changjiang.monitor.dto.region.RegionDTO;
 import com.changjiang.monitor.dto.region.RegionRequest;
 import com.changjiang.monitor.dto.status.RegionStatus;
-import com.changjiang.monitor.dto.status.TenantStatus;
 import com.changjiang.monitor.region.IRegionService;
-import com.changjiang.monitor.result.PageResult;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 /**
  * 区域
@@ -26,16 +22,16 @@ public class RegionController {
     private IRegionService regionService;
 
     /**
-     * 分页检索
+     * This method is used to retrieve a page of objects based on the provided parameters.
      *
-     * @param tenantId 租户id
-     * @param name     名称
-     * @param status   状态
-     * @param type     类型
-     * @param parent   主区域
-     * @param pageNo   分页参数
-     * @param pageSize 分页参数
-     * @return
+     * @param tenantId  The ID of the tenant for which the objects should be retrieved.
+     * @param name      The name of the objects to be retrieved (optional).
+     * @param status    The status of the objects to be retrieved (optional).
+     * @param type      The type of the objects to be retrieved (optional).
+     * @param parent    Indicates if the objects should be parent objects (optional).
+     * @param pageNo    The page number of the results to be retrieved (default value: 0).
+     * @param pageSize  The maximum number of results per page (default value: 10).
+     * @return          The page of objects matching the provided criteria.
      */
     @GetMapping("/page")
     public Object page(@RequestParam String tenantId, @RequestParam(required = false) String name,

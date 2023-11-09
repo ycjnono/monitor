@@ -18,7 +18,7 @@ import java.util.Objects;
  * @Date 2023/9/4 since beijing
  */
 @RestController
-@RequestMapping("/console/component/file")
+@RequestMapping("/component/file")
 public class FileController {
 
     @Resource
@@ -29,8 +29,7 @@ public class FileController {
         String name = file.getOriginalFilename();
         String contentType = file.getContentType();
         InputStream inputStream = file.getInputStream();
-        String uploadPath = Objects.requireNonNull(UserTokenWrapper.currentUser()).getTenantId()
-                + "/" + name;
-        return minioUtil.putObject(name, contentType,uploadPath, inputStream);
+        String uploadPath = Objects.requireNonNull(UserTokenWrapper.currentUser()).getTenantId();
+        return minioUtil.putObject(name, uploadPath, contentType, inputStream);
     }
 }

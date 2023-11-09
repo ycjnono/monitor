@@ -1,6 +1,7 @@
 package com.changjiang.monitor.dto.region;
 
 import com.changjiang.monitor.dto.status.RegionStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -63,10 +64,18 @@ public class RegionDTO implements Serializable {
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     /**
      * 修改时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
+
+    /**
+     * 修改时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date expiredTime;
 }

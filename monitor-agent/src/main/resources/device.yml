@@ -1,0 +1,7 @@
+device:
+  p_type: Modbus_RTU
+  metrics:
+    "CO2"
+    "O2"
+    "Temp"
+  id: 12345678

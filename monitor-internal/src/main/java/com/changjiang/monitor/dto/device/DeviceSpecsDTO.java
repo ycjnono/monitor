@@ -1,6 +1,7 @@
 package com.changjiang.monitor.dto.device;
 
 import com.changjiang.monitor.base.BaseDTO;
+import com.changjiang.monitor.dto.status.Status;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,6 +19,11 @@ public class DeviceSpecsDTO extends BaseDTO {
      * 规格名称
      */
     private String name;
+
+    /**
+     * 设备规格状态
+     */
+    private Status status;
 
     /**
      * 规格说明
